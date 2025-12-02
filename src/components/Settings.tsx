@@ -30,6 +30,12 @@ export default function Settings(props: SettingsProps) {
     applyTheme(theme);
   };
 
+  onCleanup(() => {
+    if (!hasSaved) {
+      applyTheme(initialTheme);
+    }
+  });
+
   const handleSave = async () => {
     const url = endpoint().trim();
 
