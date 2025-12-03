@@ -15,7 +15,9 @@ import SessionList from "./components/SessionList";
 import ChatView from "./components/ChatView";
 import MessageInput from "./components/MessageInput";
 import Settings from "./components/Settings";
+import Login from "./components/Login";
 import { addSession } from "./stores/session";
+import { isLoggedIn } from "./stores/auth";
 
 export default function App() {
   const [api, setApi] = createSignal<OpenCodeClient | null>(null);
@@ -181,11 +183,12 @@ export default function App() {
   });
 
   return (
-    <div class="h-screen flex flex-col bg-base-100">
-      <div class="drawer lg:drawer-open h-full">
-        <input id="drawer-toggle" type="checkbox" class="drawer-toggle" />
+    <Show when={isLoggedIn()} fallback={<Login />}>
+      <div class="h-screen flex flex-col bg-base-100">
+        <div class="drawer lg:drawer-open h-full">
+          <input id="drawer-toggle" type="checkbox" class="drawer-toggle" />
 
-        <div class="drawer-content flex flex-col max-h-dvh">
+          <div class="drawer-content flex flex-col max-h-dvh">
           <div class="navbar bg-base-200 lg:hidden">
             <div class="flex-none">
               <label for="drawer-toggle" class="btn btn-square btn-ghost">
@@ -295,14 +298,15 @@ export default function App() {
             <SessionList api={api()} />
           </div>
         </div>
-        <Show when={showSettings()}>
-          <div class="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-            <div class="max-h-[90vh] overflow-auto">
-              <Settings onClose={() => setShowSettings(false)} />
+          <Show when={showSettings()}>
+            <div class="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+              <div class="max-h-[90vh] overflow-auto">
+                <Settings onClose={() => setShowSettings(false)} />
+              </div>
             </div>
-          </div>
-        </Show>
+          </Show>
+        </div>
       </div>
-    </div>
+    </Show>
   );
 }
