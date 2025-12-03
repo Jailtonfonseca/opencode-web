@@ -6,6 +6,7 @@ import {
   AVAILABLE_THEMES,
   type Theme,
 } from "../stores/config";
+import { logout } from "../stores/auth";
 import { createClient } from "../api/client";
 
 interface SettingsProps {
@@ -29,6 +30,12 @@ export default function Settings(props: SettingsProps) {
     setSelectedTheme(theme);
     applyTheme(theme);
   };
+
+  onCleanup(() => {
+    if (!hasSaved) {
+      applyTheme(initialTheme);
+    }
+  });
 
   const handleSave = async () => {
     const url = endpoint().trim();
@@ -138,6 +145,9 @@ export default function Settings(props: SettingsProps) {
               Close
             </button>
           )}
+          <button class="btn btn-error btn-outline" onClick={logout}>
+            Logout
+          </button>
           <button class="btn btn-primary" onClick={handleSave}>
             Save & Connect
           </button>
