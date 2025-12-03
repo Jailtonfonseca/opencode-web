@@ -1,8 +1,19 @@
-# OpenCode Web
+<div align="center">
+  <img src="public/icons/icon.svg" height="120" alt="OpenCode Logo" />
+  <h1>OpenCode Web</h1>
+  <p>
+    A modern, responsive web interface for <a href="https://github.com/sst/opencode">OpenCode</a>.
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/Built%20With-SolidJS-blue?style=flat-square&logo=solid" alt="SolidJS" />
+    <img src="https://img.shields.io/badge/Styled%20With-Tailwind-38bdf8?style=flat-square&logo=tailwindcss" alt="Tailwind" />
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" />
+  </p>
+</div>
 
-A modern, responsive web interface for [OpenCode](https://github.com/sst/opencode) built with SolidJS, featuring real-time message streaming, virtual scrolling for optimal performance, and a simple UI.
+<br />
 
-<img width="2485" height="1555" alt="Screenshot 2025-10-21 at 12-22-58 OpenCode Web" src="https://github.com/user-attachments/assets/2a7f5e3c-de70-40ef-819b-44e86f1554bd" />
+<img width="2485" height="1555" alt="Screenshot 2025-10-21 at 12-22-58 OpenCode Web" src="https://github.com/user-attachments/assets/2a7f5e3c-de70-40ef-819b-44e86f1554bd" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);" />
 
 ## Features
 
@@ -14,18 +25,53 @@ A modern, responsive web interface for [OpenCode](https://github.com/sst/opencod
 - **Flexible Configuration** - Frontend-only or proxied-backend modes
 - **Theme Customization** - Choose from 32 DaisyUI themes
 - **Mobile Responsive** - Optimized for mobile devices with collapsible sidebar
+- **Authentication** - Simple client-side password protection (default: `opencode`)
 
 ## Quick Start
 
-## Frontend mode
+### Frontend Mode
 With "Frontend mode" the app runs as a static SPA. You're expected to have an OpenCode API server running somewhere accessible. You can start one using `opencode serve`.
 
-You can then use the the [hosted frontend](https://opencode-web.pages.dev/). Alternatively you can build it yourself using `npm run build`, and then host anywhere. 
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+3. Open `http://localhost:5173`
 
-## Proxied mode
-With "Proxied mode" OpenCode Web will auto start `opencode serve` (so it needs to be in your `$PATH`), proxy it under `/api`, and auto-configure the UI to use it. This mode isn't purely static and should be started from the device you're using `opencode` from. You can then expose it to the internet using something like [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) and configure some access control for it.
+You can also use the [hosted frontend](https://opencode-web.pages.dev/).
 
-You can start this mode using `npm run dev:proxy`
+### Proxied Mode
+With "Proxied mode" OpenCode Web will auto start `opencode serve` (so it needs to be in your `$PATH`), proxy it under `/api`, and auto-configure the UI to use it. This mode isn't purely static and should be started from the device you're using `opencode` from.
+
+To start this mode:
+```bash
+npm run dev:proxy
+```
+
+## Configuration
+
+You can configure the application using environment variables:
+
+- `VITE_ACCESS_PASSWORD`: The password for the login screen (default: `opencode`).
+- `VITE_API_DEFAULT`: The default API endpoint (default: derived from proxy or empty).
+
+## Development
+
+### Running Tests
+This project uses `vitest` for unit testing.
+
+```bash
+npm test
+```
+
+### Building for Production
+```bash
+npm run build
+```
 
 ## License
 

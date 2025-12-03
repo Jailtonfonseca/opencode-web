@@ -1,0 +1,11 @@
+services:
+  opencode-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_ACCESS_PASSWORD=${VITE_ACCESS_PASSWORD:-opencode}
+        - VITE_API_DEFAULT=${VITE_API_DEFAULT}
+    ports:
+      - "8080:80"
+    restart: always
