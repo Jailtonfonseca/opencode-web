@@ -4,7 +4,7 @@
   "description": "Web interface for OpenCode",
   "type": "module",
   "engines": {
-    "node": ">=25.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,8 @@
     "dev:proxy": "tsx server/proxy.ts",
     "dev:proxy:here": "OPENCODE_SERVE_CWD=$PWD tsx server/proxy.ts",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@opencode-ai/sdk": "^0.15.10",
