@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, createRoot } from 'solid-js';
 
 const STORAGE_KEY = 'opencode-config';
 
@@ -45,9 +45,11 @@ function saveConfig(config: Config) {
 
 export const [config, setConfig] = createSignal<Config>(loadConfig());
 
-createEffect(() => {
-  saveConfig(config());
-  document.documentElement.setAttribute('data-theme', config().theme);
+createRoot(() => {
+  createEffect(() => {
+    saveConfig(config());
+    document.documentElement.setAttribute('data-theme', config().theme);
+  });
 });
 
 export function updateApiEndpoint(endpoint: string) {
